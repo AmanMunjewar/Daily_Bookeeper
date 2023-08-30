@@ -1,10 +1,40 @@
 import datetime
 
+balance_flag = True
+
 
 def print_pass():
     file = open("pass.txt", "r")
     print(file.read())
     file.close()
+
+
+def cur_balance():
+    file = open("pass.txt", "r")
+    obj = ""
+    for i in file:
+        obj = i
+    obj = obj.lstrip()
+    num = obj.split(" ")
+    print("Your current balance is:", float(num[0]))
+    file.close()
+
+
+def min_balance():
+    file = open("pass.txt", "r")
+    bal = []
+    flag = True
+    for i in file:
+        if flag:
+            flag = False
+            continue
+        i = i.lstrip()
+        i = i.split(" ")
+        bal.append(float(i[0]))
+    if balance_flag:
+        print("Your minimum balance is", min(bal))
+    else:
+        print("Your maximum balance is", max(bal))
 
 
 class Passbook:
@@ -56,7 +86,10 @@ while True:
     print("1. Print Balance Book")
     print("2. Register a Expense")
     print("3. Register a Gain")
-    print("4. Exit")
+    print("4. Current balance")
+    print("5. Minimum balance")
+    print("6. Maximum balance")
+    print("7. Exit")
     ch = int(input("Enter your choice: "))
 
     if ch == 1:
@@ -66,5 +99,13 @@ while True:
     elif ch == 3:
         book.deposit()
     elif ch == 4:
+        cur_balance()
+    elif ch == 5:
+        balance_flag = True
+        min_balance()
+    elif ch == 6:
+        balance_flag = False
+        min_balance()
+    elif ch == 7:
         print("Exit....")
         break
