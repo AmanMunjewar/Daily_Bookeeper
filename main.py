@@ -1,15 +1,24 @@
-import datetime
+# A mini bookkeeper to keep track of all your daily expenses
 
+import datetime
 balance_flag = True
 
 
 def print_pass():
+    """
+    Prints all your transactions.
+    :return:
+    """
     file = open("pass.txt", "r")
     print(file.read())
     file.close()
 
 
 def cur_balance():
+    """
+    Gives you your current balance.
+    :return:
+    """
     file = open("pass.txt", "r")
     obj = ""
     for i in file:
@@ -21,6 +30,10 @@ def cur_balance():
 
 
 def min_balance():
+    """
+    Can be used to print minimum or maximum balance.
+    :return:
+    """
     file = open("pass.txt", "r")
     bal = []
     flag = True
@@ -41,6 +54,9 @@ class Passbook:
     balance = 0
 
     def __init__(self):
+        """
+        Initialize the class and creates a file to store all the transactions and also set the balance.
+        """
         import os
         file_path = "pass.txt"
 
@@ -60,6 +76,10 @@ class Passbook:
             file.close()
 
     def withdraw(self):
+        """
+        Record a expense the book.
+        :return:
+        """
         with_amount = float(input("Enter the amount: "))
         if with_amount > self.balance:
             print("Enter a valid amount")
@@ -71,6 +91,10 @@ class Passbook:
             file.close()
 
     def deposit(self):
+        """
+        Record a gain in the book.
+        :return:
+        """
         depo_amount = float(input("Enter the amount: "))
         self.balance += depo_amount
         file = open("pass.txt", "a")
